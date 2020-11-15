@@ -36,7 +36,7 @@ class CalcBody extends Component{
                     case '=':
                         return eval(value);
                     case '⇦':
-                        return value.substring(0, value.length-1);
+                        return value.slice(0, -1);
                     case '÷':
                         value += '/';
                         return value;
