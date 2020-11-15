@@ -10,3 +10,8 @@
     word-wrap: break-word;
     overflow-y: scroll;
 }
+
+.Display::-webkit-scrollbar{
+    display: none;
+}
+

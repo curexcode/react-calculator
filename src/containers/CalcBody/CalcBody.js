@@ -40,6 +40,9 @@ class CalcBody extends Component{
                     case '÷':
                         value += '/';
                         return value;
+                    case '±':
+                        value += '-';
+                        return value;
                     default:
                         return value +  operation;
                 }
