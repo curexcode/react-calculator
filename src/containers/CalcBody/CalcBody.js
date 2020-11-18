@@ -30,9 +30,12 @@ class CalcBody extends Component{
         calcEngine = (value, operation) => {
             if(value === 'Error')
                 value = '';
-            if(this.state.answered)
-                    this.setState({displayValue: '' ,answered: false});
+            if(this.state.answered){
+                    this.setState({answered: false});
+                    return operation;
+            }
 
+            console.log('answered = ', this.state.answered);
             try{
                 switch (operation){
                     case 'CE':
