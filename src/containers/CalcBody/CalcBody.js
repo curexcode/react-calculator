@@ -5,9 +5,15 @@ import Button from '../../components/Button/Button';
 
 class CalcBody extends Component{
 
-        state = {
-            displayValue:'' 
+        constructor(props){
+            super(props);
+            this.state = {
+                displayValue:'',
+                answered: false,
+            }
+            document.addEventListener('keydown', this.onKeyPressed);
         }
+
 
         clickEventHandler = (event) => {
             let value = this.state.displayValue;
@@ -24,6 +30,9 @@ class CalcBody extends Component{
         calcEngine = (value, operation) => {
             if(value === 'Error')
                 value = '';
+            if(this.state.answered)
+                    this.setState({displayValue: '' ,answered: false});
+
             try{
                 switch (operation){
                     case 'CE':
@@ -34,6 +43,7 @@ class CalcBody extends Component{
                         value += '*';
                         return value;
                     case '=':
+                        this.setState({ answered: true});
                         return eval(value);
                     case '⇦':
                         return value.slice(0, -1);
@@ -53,10 +63,66 @@ class CalcBody extends Component{
             }
         }
 
+        onKeyPressed = (e) => {
+                e.preventDefault();
+                if(this.state.answered)
+                    this.setState({displayValue: '' ,answered: false});
+                let keyCode = e.keyCode;
+                let key = e.key;
+                console.log('key code :' + keyCode + ' Key: ' + key);
+                let value = this.state.displayValue;
+                
+                switch(e.key){
+                    case 'Escape':
+                        this.setState({displayValue: ''})
+                        break;
+                    case '+':
+                        value = this.calcEngine(value, '+');
+                        this.setState({displayValue: value});
+                        break;
+                    case '-':
+                        value = this.calcEngine(value, '-');
+                        this.setState({displayValue: value});
+                        break;
+                    case '*':
+                        value = this.calcEngine(value, 'x');
+                        this.setState({displayValue: value});
+                        break;
+                    case '/':
+                        value = this.calcEngine(value, '÷');
+                        this.setState({displayValue: value});
+                        break;
+                    case '=':
+                    case 'Enter':
+                        value = this.calcEngine(value, '=');
+                        this.setState({displayValue: value, answered: true});
+                        break;
+                    case 'Backspace':
+                        value = this.calcEngine(value, '⇦');
+                        this.setState({displayValue: value});
+                        break;
+                    case '.':
+                        value = this.calcEngine(value, '.');
+                        this.setState({displayValue: value});
+                        break;
+                    default:
+                        void(0);
+                }
+                
+                let num = parseInt(e.key, 10);
+                if(!isNaN(num)){
+                    value += num;
+                    this.setState({displayValue: value});
+                }
+
+                // if(e.key === 'Escape'){
+                // }
+
+        }
+
         render(){
             let buttons = [];
             const buttonText = ['CE', 'C', '⇦', '÷', 7,8,9,'x', 4,5,6, '-', 1,2,3,'+', '±', 0, '.', '='];
-
             buttons.push(buttonText.map( ch => {
                 return <Button text={ch} clicked={this.clickEventHandler}/>
             }));
