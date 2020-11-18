@@ -32,7 +32,10 @@ class CalcBody extends Component{
                 value = '';
             if(this.state.answered){
                     this.setState({answered: false});
-                    return operation;
+                    if( parseInt(operation))
+                        return operation;
+                    else 
+                        return '';
             }
 
             console.log('answered = ', this.state.answered);
