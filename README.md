@@ -1,6 +1,6 @@
 # React Calculator
 A simple calculator created using react. 
-It supports key bindings.
+It also supports key bindings.
 # Screenshot 
 ![alt text](Screenshot.png)
 
