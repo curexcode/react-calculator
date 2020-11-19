@@ -6,6 +6,12 @@
   align-items: center;
 }
 
+.CalcBody{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .App-logo {
   height: 10vmin;
   pointer-events: none;
@@ -13,10 +19,23 @@
   grid-column: 2/4;
 }
 
+
+.logo{
+    width: 100px;
+    height: 100px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.header{
+    display: flex;
+    margin: 0;
+    flex-direction: row;
+    justify-content: center;
+    /* background-color: yellow; */
 }
 
 .App-header {

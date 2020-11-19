@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import classes from './CalcBody.module.css';
 import Display from '../Display/Display';
-import reactIcon from '../../logo.svg';
 import Button from '../../components/Button/Button';
 
 class CalcBody extends Component{
@@ -134,17 +133,11 @@ class CalcBody extends Component{
                 return <Button text={ch} clicked={this.clickEventHandler}/>
             }));
             return (
-                <>
-                <div className={classes.header}>
-                    <img src={reactIcon} className={classes.logo}/>
-                    <h1>React Calculator</h1>
-                    <img src={reactIcon} className={classes.logo}/>
-                </div>
+               
                 <div  className={classes.CalcBody}>
                     <Display value={this.state.displayValue}/>
                     {buttons}
                 </div>
-                </>
             )
         }
     }
